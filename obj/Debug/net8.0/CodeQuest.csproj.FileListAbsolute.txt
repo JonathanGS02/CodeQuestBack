@@ -1,0 +1,7 @@
+C:\Users\Geoex\source\repos\CodeQuest\CodeQuest\obj\Debug\net8.0\CodeQuest.csproj.AssemblyReference.cache
+C:\Users\Geoex\source\repos\CodeQuest\CodeQuest\obj\Debug\net8.0\CodeQuest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Geoex\source\repos\CodeQuest\CodeQuest\obj\Debug\net8.0\CodeQuest.AssemblyInfoInputs.cache
+C:\Users\Geoex\source\repos\CodeQuest\CodeQuest\obj\Debug\net8.0\CodeQuest.AssemblyInfo.cs
+C:\Users\Geoex\source\repos\CodeQuest\CodeQuest\obj\Debug\net8.0\CodeQuest.csproj.CoreCompileInputs.cache
+C:\Users\Geoex\source\repos\CodeQuest\CodeQuest\obj\Debug\net8.0\CodeQuest.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Geoex\source\repos\CodeQuest\CodeQuest\obj\Debug\net8.0\CodeQuest.MvcApplicationPartsAssemblyInfo.cache
