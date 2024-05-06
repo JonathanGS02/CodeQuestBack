@@ -1,4 +1,13 @@
+using CodeQuest.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<CodeQuestContext>
+    (options => options.UseLazyLoadingProxies().UseSqlServer
+    (builder.Configuration.GetConnectionString("CodeQuestContextConnection")));
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Add services to the container.
 

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeQuest.Data
 {
-    public class Context:DbContext
+    public class CodeQuestContext:DbContext
     {
-        public Context(DbContextOptions<Context> options)
+        public CodeQuestContext(DbContextOptions<CodeQuestContext> options)
             : base(options) { }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Questao> Questao { get; set; }
