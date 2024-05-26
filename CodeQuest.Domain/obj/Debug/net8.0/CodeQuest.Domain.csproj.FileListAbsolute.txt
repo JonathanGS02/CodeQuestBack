@@ -1,0 +1,12 @@
+C:\Users\Geoex\Desktop\tcc_jhon2\CodeQuest.Domain\bin\Debug\net8.0\CodeQuest.Domain.deps.json
+C:\Users\Geoex\Desktop\tcc_jhon2\CodeQuest.Domain\bin\Debug\net8.0\CodeQuest.Domain.dll
+C:\Users\Geoex\Desktop\tcc_jhon2\CodeQuest.Domain\bin\Debug\net8.0\CodeQuest.Domain.pdb
+C:\Users\Geoex\Desktop\tcc_jhon2\CodeQuest.Domain\obj\Debug\net8.0\CodeQuest.Domain.csproj.AssemblyReference.cache
+C:\Users\Geoex\Desktop\tcc_jhon2\CodeQuest.Domain\obj\Debug\net8.0\CodeQuest.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Geoex\Desktop\tcc_jhon2\CodeQuest.Domain\obj\Debug\net8.0\CodeQuest.Domain.AssemblyInfoInputs.cache
+C:\Users\Geoex\Desktop\tcc_jhon2\CodeQuest.Domain\obj\Debug\net8.0\CodeQuest.Domain.AssemblyInfo.cs
+C:\Users\Geoex\Desktop\tcc_jhon2\CodeQuest.Domain\obj\Debug\net8.0\CodeQuest.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Geoex\Desktop\tcc_jhon2\CodeQuest.Domain\obj\Debug\net8.0\CodeQuest.Domain.dll
+C:\Users\Geoex\Desktop\tcc_jhon2\CodeQuest.Domain\obj\Debug\net8.0\refint\CodeQuest.Domain.dll
+C:\Users\Geoex\Desktop\tcc_jhon2\CodeQuest.Domain\obj\Debug\net8.0\CodeQuest.Domain.pdb
+C:\Users\Geoex\Desktop\tcc_jhon2\CodeQuest.Domain\obj\Debug\net8.0\ref\CodeQuest.Domain.dll

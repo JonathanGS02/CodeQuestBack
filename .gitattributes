@@ -1,0 +1,7 @@
+# Define EOL for all text files
+* text=auto
+
+# Specific overrides
+*.cs text eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
