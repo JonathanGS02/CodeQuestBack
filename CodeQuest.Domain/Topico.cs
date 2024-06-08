@@ -19,5 +19,6 @@ namespace CodeQuest.Domain
         public int QtdQuestoes { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        public int Numero { get; set; }
     }
 }

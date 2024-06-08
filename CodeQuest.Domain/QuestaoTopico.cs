@@ -18,5 +18,7 @@ namespace CodeQuest.Domain
         [Required]
         public Guid TopicoId { get; set; }
         public virtual Topico Topico { get; set; }
+        public int Numero { get; set; }
+
     }
 }
