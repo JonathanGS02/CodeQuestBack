@@ -1,6 +1,7 @@
 ﻿using CodeQuest.Repository.Data;
 using CodeQuest.Repository.Services.Interface;
 using Microsoft.EntityFrameworkCore;
+using CodeQuest.Domain.Identity;
 
 namespace CodeQuest.Repository.Services.Repository
 {
@@ -13,7 +14,7 @@ namespace CodeQuest.Repository.Services.Repository
             _context = context;
         }
 
-        public async Task<Domain.Identity.User> GetUserByIdAsync(int id)
+        public async Task<User> GetUserByIdAsync(int id)
         {
             try
             {
@@ -25,7 +26,7 @@ namespace CodeQuest.Repository.Services.Repository
             }
         }
 
-        public async Task<Domain.Identity.User> GetUserByUsernameAsync(string username)
+        public async Task<User> GetUserByUsernameAsync(string username)
         {
             try
             {
@@ -37,7 +38,7 @@ namespace CodeQuest.Repository.Services.Repository
             }
         }
 
-        public async Task<IEnumerable<Domain.Identity.User>> GetUsersAsync()
+        public async Task<IEnumerable<User>> GetUsersAsync()
         {
             try
             {

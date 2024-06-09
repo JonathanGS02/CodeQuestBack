@@ -115,8 +115,7 @@ namespace CodeQuest.Repository.Services.Repository
         {
             try
             {
-                return await _userManager.Users
-                                         .AnyAsync(user => user.UserName == username.ToLower());
+                return await _userManager.Users.AnyAsync(user => user.UserName == username.ToLower());
             }
             catch (Exception ex)
             {

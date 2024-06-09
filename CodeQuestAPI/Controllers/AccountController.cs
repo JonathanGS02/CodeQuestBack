@@ -10,7 +10,7 @@ namespace CodeQuestAPI.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AccountController : ControllerBase
     {
         private readonly IAccount _accountService;
@@ -24,13 +24,14 @@ namespace CodeQuestAPI.Controllers
             _util = util;
         }
 
-        [HttpGet("GetUser/{userName}")]
+        [HttpGet("GetUser")]
         [AllowAnonymous]
         public async Task<IActionResult> GetUser()
         {
             try
             {
-                var user = await _accountService.GetUserByUserNameAsync(User.GetUserName());
+                var usuario = User.GetUserName();
+                var user = await _accountService.GetUserByUserNameAsync(usuario);
                 return Ok(user);
             }
             catch (Exception ex)
