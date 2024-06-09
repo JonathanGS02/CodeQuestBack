@@ -1,4 +1,5 @@
 ﻿using CodeQuest.Repository.Dtos.Questao;
+using CodeQuest.Repository.Dtos.Topico;
 using CodeQuest.Repository.Services.Interface;
 using CodeQuestAPI.Extensions;
 using Microsoft.AspNetCore.Authorization;
@@ -10,15 +11,15 @@ namespace CodeQuestAPI.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class QuestaoController : ControllerBase
+    public class TopicoController : ControllerBase
     {
 
-        private readonly IQuestaoService _questaoService;
+        private readonly ITopicoService _topicoService;
         private readonly IAccount _accountService;
 
-        public QuestaoController(IQuestaoService questaoService, IAccount accountService)
+        public TopicoController(ITopicoService topicoService, IAccount accountService)
         {
-            _questaoService = questaoService;
+            _topicoService = topicoService;
             _accountService = accountService;
         }
 
@@ -27,18 +28,18 @@ namespace CodeQuestAPI.Controllers
         {
             try
             {
-                var questoes = await _questaoService.GetAllQuestaoAsync();
+                var topicos = await _topicoService.GetAllTopicoAsync();
 
-                if (questoes == null)
+                if (topicos == null)
                 {
                     return NoContent();
                 }
 
-                return Ok(questoes);
+                return Ok(topicos);
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar recuperar questão. Erro: {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar recuperar topicos. Erro: {ex.Message}");
             }
         }
 
@@ -47,22 +48,22 @@ namespace CodeQuestAPI.Controllers
         {
             try
             {
-                var questao = await _questaoService.GetQuestaoByIdAsync(id);
+                var topico = await _topicoService.GetTopicoByIdAsync(id);
 
-                if (questao == null)
+                if (topico == null)
                 {
                     return NoContent();
                 }
-                return Ok(questao);
+                return Ok(topico);
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar recuperar questão. Erro: {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar recuperar topico. Erro: {ex.Message}");
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] QuestaoDto model)
+        public async Task<IActionResult> Post([FromBody] TopicoDto model)
         {
             try
             {
@@ -70,25 +71,24 @@ namespace CodeQuestAPI.Controllers
                 var user = await _accountService.GetUserByUserNameAsync(usuario);
 
                 if (user.Funcao != "Administrador")
-                    return Ok("Você não possui permissão para adicionar uma Questão!");
+                    return Ok("Você não possui permissão para adicionar uma topico!");
 
-                var questao = await _questaoService.AddQuestao(User.GetUserId(), model);
+                var topico = await _topicoService.AddTopico(User.GetUserId(), model);
 
-                if (questao == null)
+                if (topico == null)
                 {
                     return NoContent();
                 }
-                return Ok(questao);
+                return Ok(topico);
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar adicionar questão. Erro: {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar adicionar topico. Erro: {ex.Message}");
             }
         }
 
-
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, [FromBody] QuestaoDto model)
+        public async Task<IActionResult> Put(Guid id, [FromBody] TopicoDto model)
         {
             try
             {
@@ -96,19 +96,19 @@ namespace CodeQuestAPI.Controllers
                 var user = await _accountService.GetUserByUserNameAsync(usuario);
 
                 if (user.Funcao != "Administrador")
-                    return Ok("Você não possui permissão para adicionar uma Questão!");
+                    return Ok("Você não possui permissão para adicionar uma topico!");
 
-                var questao = await _questaoService.UpdateQuestao(User.GetUserId(), id, model);
+                var topico = await _topicoService.UpdateTopico(User.GetUserId(), id, model);
 
-                if (questao == null)
+                if (topico == null)
                 {
                     return NoContent();
                 }
-                return Ok(questao);
+                return Ok(topico);
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar atualizar questão. Erro: {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar atualizar topico. Erro: {ex.Message}");
             }
         }
 
@@ -117,17 +117,17 @@ namespace CodeQuestAPI.Controllers
         {
             try
             {
-                var questao = await _questaoService.DeleteQuestao(User.GetUserId(), id);
+                var topico = await _topicoService.DeleteTopico(User.GetUserId(), id);
 
-                if (questao == false)
+                if (topico == false)
                 {
-                    return BadRequest("Erro ao tentar deletar questão.");
+                    return BadRequest("Erro ao tentar deletar topico.");
                 }
                 return Ok(new { message = "Deletado" });
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar deletar questão. Erro: {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar deletar topico. Erro: {ex.Message}");
             }
         }
     }
