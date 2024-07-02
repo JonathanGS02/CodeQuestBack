@@ -84,6 +84,7 @@ builder.Services.AddScoped<IUser, UserRepository>();
 builder.Services.AddScoped<IUtil, Util>();
 builder.Services.AddScoped<IQuestaoService, QuestaoRepository>();
 builder.Services.AddScoped<ITopicoService, TopicoRepository>();
+builder.Services.AddScoped<IQuestaoTopicoService, QuestaoTopicoRepository>();
 
 //habilitando o token no swagger
 builder.Services.AddSwaggerGen(options =>
