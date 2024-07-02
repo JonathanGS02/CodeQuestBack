@@ -116,8 +116,8 @@ namespace CodeQuestAPI.Controllers
                 var usuario = User.GetUserName();
                 var user = await _accountService.GetUserByUserNameAsync(usuario);
 
-                if (user.Funcao != "Administrador")
-                    return Ok("Você não possui permissão para adicionar uma topico!");
+                //if (user.Funcao != "Administrador")
+                //    return Ok("Você não possui permissão para adicionar uma topico!");
 
                 var topico = await _topicoService.AddTopico(User.GetUserId(), model);
 
