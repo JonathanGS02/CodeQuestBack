@@ -13,12 +13,14 @@ namespace CodeQuest.Repository.Services.Repository
         private readonly IGeralPersist _geralPersist;
         private readonly IMapper _mapper;
         private readonly Context _context;
+        private readonly IQuestaoTopicoService _questaoTopicoService;
 
-        public TopicoRepository(IGeralPersist geralPersist, IMapper mapper, Context context)
+        public TopicoRepository(IGeralPersist geralPersist, IMapper mapper, Context context, IQuestaoTopicoService questaoTopicoService)
         {
             _geralPersist = geralPersist;
             _mapper = mapper;
             _context = context;
+            _questaoTopicoService = questaoTopicoService;
         }
 
         public async Task<string> AddTopico(int userId, TopicoDto model)
@@ -87,6 +89,26 @@ namespace CodeQuest.Repository.Services.Repository
 
                 if (topico == null)
                     return null;
+
+                var resultado = _mapper.Map<TopicoDto>(topico);
+
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<TopicoDto> GetTopicoByRandomAsync(int nivel)
+        {
+            try
+            {
+                var topico = await _context.Topicos
+                                            .Include(t => t.Questoes)
+                                            .Where(x => x.Nivel == nivel)
+                                            .OrderBy(x => Guid.NewGuid())
+                                            .FirstOrDefaultAsync();
 
                 var resultado = _mapper.Map<TopicoDto>(topico);
 

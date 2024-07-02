@@ -17,25 +17,24 @@ namespace CodeQuest.Domain
         [MaxLength(50)]
         public string Titulo { get; set; }
         [Required]
-        [MaxLength(50)]
+        [MaxLength(250)]
         public string Pergunta1 { get; set; }
         [Required]
-        [MaxLength(100)]
+        [MaxLength(250)]
         public string Pergunta2 { get; set; }
         [Required]
-        [MaxLength(100)]
+        [MaxLength(250)]
         public string Pergunta3 { get; set; }
         [Required]
-        [MaxLength(100)]
+        [MaxLength(250)]
         public string Pergunta4 { get; set; }
         [Required]
-        [MaxLength(100)]
+        [MaxLength(250)]
         public string Pergunta5 { get; set; }
         [Required]
-        [MaxLength(100)]
+        [MaxLength(250)]
         public string Pergunta6 { get; set; }
         [Required]
-        [MaxLength(100)]
         public Boolean PerguntaCorreta1 { get; set; }
         [Required]
         public Boolean PerguntaCorreta2 { get; set; }
@@ -54,6 +53,8 @@ namespace CodeQuest.Domain
         public int UserId { get; set; }
         public User User { get; set; }
         public int Numero { get; set; }
-
+        public double Exp { get; set; }
+        // Adicionando a coleção de navegação
+        public virtual ICollection<QuestaoTopico> QuestaoTopicos { get; set; }
     }
 }

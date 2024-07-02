@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeQuest.Domain.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -19,6 +20,9 @@ namespace CodeQuest.Domain
         public Guid TopicoId { get; set; }
         public virtual Topico Topico { get; set; }
         public int Numero { get; set; }
+        [Required]
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
 
     }
 }

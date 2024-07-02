@@ -16,5 +16,6 @@ namespace CodeQuest.Repository.Services.Interface
 
         Task<TopicoDto[]> GetAllTopicoAsync();
         Task<TopicoDto> GetTopicoByIdAsync(Guid topicoId);
+        Task<TopicoDto> GetTopicoByRandomAsync(int nivel);
     }
 }

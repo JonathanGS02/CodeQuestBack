@@ -16,11 +16,13 @@ namespace CodeQuestAPI.Controllers
 
         private readonly ITopicoService _topicoService;
         private readonly IAccount _accountService;
+        private readonly IQuestaoTopicoService _questaoTopicoService;
 
-        public TopicoController(ITopicoService topicoService, IAccount accountService)
+        public TopicoController(ITopicoService topicoService, IAccount accountService, IQuestaoTopicoService questaoTopicoService)
         {
             _topicoService = topicoService;
             _accountService = accountService;
+            _questaoTopicoService = questaoTopicoService;
         }
 
         [HttpGet]
@@ -55,6 +57,50 @@ namespace CodeQuestAPI.Controllers
                     return NoContent();
                 }
                 return Ok(topico);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar recuperar topico. Erro: {ex.Message}");
+            }
+        }
+
+        [HttpGet("{nivel}")]
+        public async Task<IActionResult> GetRound(int nivel)
+        {
+            try
+            {
+                var topico = await _topicoService.GetTopicoByRandomAsync(nivel);
+
+                if (topico == null)
+                {
+                    return NoContent();
+                }
+                return Ok(topico);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar recuperar topico. Erro: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> PostResposta([FromBody] TopicoDto model)
+        {
+            try
+            {
+                if (model == null)
+                {
+                    return BadRequest("Erro ao tentar salvar resposta!");
+                }
+                
+                var retorno = await _questaoTopicoService.PostSalvaQuestaoTopicoAsync(model, User.GetUserId());
+
+                if (retorno == null)
+                {
+                    return NoContent();
+                }
+
+                return Ok(retorno);
             }
             catch (Exception ex)
             {

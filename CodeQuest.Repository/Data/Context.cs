@@ -3,6 +3,7 @@ using CodeQuest.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace CodeQuest.Repository.Data
 {
@@ -35,13 +36,22 @@ namespace CodeQuest.Repository.Data
                 .IsRequired();
             });
 
-            //modelBuilder.Entity<QuestaoTopico>()
-            //    .HasKey(QT => new { QT.QuestaoId, QT.TopicoId });
+            modelBuilder.Entity<QuestaoTopico>()
+                .HasKey(QT => new { QT.QuestaoId, QT.TopicoId });
 
-            //modelBuilder.Entity<Topico>()
-            //    .HasMany(t => t.Questoes)
-            //    .WithOne(q => q.Topico)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            // Configurando o relacionamento entre QuestaoTopico e Questao
+            modelBuilder.Entity<QuestaoTopico>()
+                .HasOne(qt => qt.Questao)
+                .WithMany(q => q.QuestaoTopicos)
+                .HasForeignKey(qt => qt.QuestaoId)
+                .OnDelete(DeleteBehavior.Cascade); // Exclusão em cascata
+
+            // Configurando o relacionamento entre QuestaoTopico e Topico
+            modelBuilder.Entity<QuestaoTopico>()
+                .HasOne(qt => qt.Topico)
+                .WithMany(t => t.QuestaoTopicos)
+                .HasForeignKey(qt => qt.TopicoId)
+                .OnDelete(DeleteBehavior.Cascade); // Exclusão em cascata
         }
     }
 }

@@ -20,5 +20,7 @@ namespace CodeQuest.Domain
         public int UserId { get; set; }
         public User User { get; set; }
         public int Numero { get; set; }
+        // Adicionando a coleção de navegação
+        public virtual ICollection<QuestaoTopico> QuestaoTopicos { get; set; }
     }
 }
