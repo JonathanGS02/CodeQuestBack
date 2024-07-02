@@ -69,8 +69,8 @@ namespace CodeQuestAPI.Controllers
                 var usuario = User.GetUserName();
                 var user = await _accountService.GetUserByUserNameAsync(usuario);
 
-                if (user.Funcao != "Administrador")
-                    return Ok("Você não possui permissão para adicionar uma Questão!");
+                //if (user.Funcao != "Administrador")
+                //    return Ok("Você não possui permissão para adicionar uma Questão!");
 
                 var questao = await _questaoService.AddQuestao(User.GetUserId(), model);
 

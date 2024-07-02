@@ -57,8 +57,7 @@ namespace CodeQuest.Repository.Dtos.Questao
         [Required]
         public Boolean Concluido { get; set; }
         public int UserId { get; set; }
-        public UserDto? User { get; set; }
         public int Numero { get; set; }
-
+        public double Exp { get; set; }
     }
 }
