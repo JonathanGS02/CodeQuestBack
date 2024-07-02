@@ -83,7 +83,7 @@ namespace CodeQuestAPI.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost("Resposta")]
         public async Task<IActionResult> PostResposta([FromBody] TopicoDto model)
         {
             try
