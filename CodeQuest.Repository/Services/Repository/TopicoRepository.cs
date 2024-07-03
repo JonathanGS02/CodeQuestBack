@@ -138,7 +138,8 @@ namespace CodeQuest.Repository.Services.Repository
                 var qt = await _context.QuestaoTopicos.Where(x => x.TopicoId == topico.TopicoId).ToListAsync();
                 var range = qt.Count();
                 var random = new Random();
-                var sortRange = random.Next(0, range);
+                var sortRange = random.Next(0, range) - 1;
+                sortRange = sortRange < 0 ? 0 : sortRange;
                 var sortRange2 = qt[0].QuestaoId;
                 var questao = await _context.Questoes.Where(x => x.QuestaoId == qt[sortRange].QuestaoId).FirstOrDefaultAsync();
 
