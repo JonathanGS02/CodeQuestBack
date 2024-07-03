@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CodeQuestAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TopicoController : ControllerBase
@@ -64,7 +64,7 @@ namespace CodeQuestAPI.Controllers
             }
         }
 
-        [HttpGet("{nivel}")]
+        [HttpGet("GetRound/{nivel}")]
         public async Task<IActionResult> GetRound(int nivel)
         {
             try

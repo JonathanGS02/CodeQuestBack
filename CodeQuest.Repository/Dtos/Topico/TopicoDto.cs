@@ -14,11 +14,11 @@ namespace CodeQuest.Repository.Dtos.Topico
     {
         public Guid TopicoId { get; set; }
         public IEnumerable<QuestaoDto> Questoes { get; set; }
+        public QuestaoDto Questao { get; set; }
         [Required]
         public int Nivel { get; set; }
         public int QtdQuestoes { get; set; }
         public int UserId { get; set; }
-        public UserDto User { get; set; }
         public int Numero { get; set; }
     }
 }

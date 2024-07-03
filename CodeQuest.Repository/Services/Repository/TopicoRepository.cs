@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CodeQuest.Domain;
 using CodeQuest.Repository.Data;
+using CodeQuest.Repository.Dtos.Questao;
 using CodeQuest.Repository.Dtos.Topico;
 using CodeQuest.Repository.Services.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -27,12 +28,35 @@ namespace CodeQuest.Repository.Services.Repository
         {
             try
             {
-                var topico = _mapper.Map<Topico>(model);
-                topico.UserId = userId;
+                //var topico = _mapper.Map<Topico>(model);
+                //topico.UserId = userId;
+
+                var topico = new Topico
+                {
+                    Nivel = model.Nivel,
+                    Numero = model.Numero,
+                    QtdQuestoes = model.QtdQuestoes,
+                    UserId = userId
+                };
+
                 _geralPersist.Add<Topico>(topico);
 
                 if (await _geralPersist.SaveChangesAsync())
+                {
+                    foreach (var item in model.Questoes)
+                    {
+                        var questaoTopico = new QuestaoTopico
+                        {
+                            TopicoId = topico.TopicoId,
+                            QuestaoId = item.QuestaoId,
+                            UserId = userId
+                        };
+                        _geralPersist.Add<QuestaoTopico>(questaoTopico);
+                        await _geralPersist.SaveChangesAsync();
+                    }
+
                     return "Topico Adicionado com Sucesso!";
+                }
 
                 return null;
             }
@@ -66,7 +90,9 @@ namespace CodeQuest.Repository.Services.Repository
         {
             try
             {
-                var topicos = await _context.Topicos.ToListAsync();
+                var topicos = await _context.Topicos
+                                            .Include(i => i.QuestaoTopicos)
+                                            .ToListAsync();
 
                 if (topicos == null)
                     return null;
@@ -105,12 +131,20 @@ namespace CodeQuest.Repository.Services.Repository
             try
             {
                 var topico = await _context.Topicos
-                                            .Include(t => t.Questoes)
                                             .Where(x => x.Nivel == nivel)
                                             .OrderBy(x => Guid.NewGuid())
                                             .FirstOrDefaultAsync();
 
+                var qt = await _context.QuestaoTopicos.Where(x => x.TopicoId == topico.TopicoId).ToListAsync();
+                var range = qt.Count();
+                var random = new Random();
+                var sortRange = random.Next(0, range);
+                var sortRange2 = qt[0].QuestaoId;
+                var questao = await _context.Questoes.Where(x => x.QuestaoId == qt[sortRange].QuestaoId).FirstOrDefaultAsync();
+
                 var resultado = _mapper.Map<TopicoDto>(topico);
+                var resultado2 = _mapper.Map<QuestaoDto>(questao);
+                resultado.Questao = resultado2;
 
                 return resultado;
             }

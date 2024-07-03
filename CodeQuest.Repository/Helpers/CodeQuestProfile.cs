@@ -2,6 +2,7 @@
 using CodeQuest.Domain;
 using CodeQuest.Domain.Identity;
 using CodeQuest.Repository.Dtos.Questao;
+using CodeQuest.Repository.Dtos.Topico;
 using CodeQuest.Repository.Dtos.User;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace CodeQuest.Repository.Helpers
             CreateMap<User, UserUpdateDto>().ReverseMap();
 
             CreateMap<Questao, QuestaoDto>().ReverseMap();
+            CreateMap<Topico, TopicoDto>().ReverseMap();
 
         }
     }
