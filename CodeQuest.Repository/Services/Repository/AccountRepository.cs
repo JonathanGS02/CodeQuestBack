@@ -86,7 +86,8 @@ namespace CodeQuest.Repository.Services.Repository
 
                 userUpdateDto.Id = user.Id;
 
-                _mapper.Map(userUpdateDto, user);
+                var updateUser = _mapper.Map(userUpdateDto, user);
+                updateUser.Imagem = $"https://localhost:7267/resources/images/{userUpdateDto.Imagem}";
 
                 if (userUpdateDto.Password != null)
                 {
@@ -94,7 +95,7 @@ namespace CodeQuest.Repository.Services.Repository
                     await _userManager.ResetPasswordAsync(user, token, userUpdateDto.Password);
                 }
 
-                _user.Update<User>(user);
+                _user.Update<User>(updateUser);
 
                 if (await _user.SaveChangesAsync())
                 {

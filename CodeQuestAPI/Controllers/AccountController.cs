@@ -141,8 +141,8 @@ namespace CodeQuestAPI.Controllers
                 var file = Request.Form.Files[0];
                 if (file.Length > 0)
                 {
-                    _util.DeleteImage(user.ImagemURL, "images");
-                    user.ImagemURL = await _util.SaveImage(file, "images");
+                    _util.DeleteImage(user.Imagem, "Images");
+                    user.Imagem = await _util.SaveImage(file, "Images");
                 }
                 var userRetorno = await _accountService.UpdateAccount(user);
 
@@ -165,7 +165,7 @@ namespace CodeQuestAPI.Controllers
 
         //    imageName = $"{imageName}{DateTime.UtcNow.ToString("yymmssfff")}{Path.GetExtension(imageFile.FileName)}";
 
-        //    var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, @"Resources/images", imageName);
+        //    var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, @"Resources/Images", imageName);
 
         //    using (var fileStream = new FileStream(imagePath, FileMode.Create))
         //    {
@@ -178,7 +178,7 @@ namespace CodeQuestAPI.Controllers
         //[NonAction]
         //public void DeleteImage(string imageName)
         //{
-        //    var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, @"Resources/images", imageName);
+        //    var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, @"Resources/Images", imageName);
         //    if (System.IO.File.Exists(imagePath))
         //        System.IO.File.Delete(imagePath);
         //}
