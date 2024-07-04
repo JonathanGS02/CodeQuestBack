@@ -155,6 +155,23 @@ namespace CodeQuestAPI.Controllers
             }
         }
 
+        [HttpPut("SalvarProgresso")]
+        public async Task<IActionResult> SalvarProgresso(UserUpdateDto userUpdateDto)
+        {
+            try
+            {
+                var user = await _accountService.SalvarProgresso(userUpdateDto);
+                if (user == null)
+                    return BadRequest("Progresso não alterado!");
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar Atualizar Usuário. Erro: {ex.Message}");
+            }
+        }
+
         //[NonAction]
         //public async Task<string> SaveImage(IFormFile imageFile)
         //{
