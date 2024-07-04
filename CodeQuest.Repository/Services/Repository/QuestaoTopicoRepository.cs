@@ -27,8 +27,8 @@ namespace CodeQuest.Repository.Services.Repository
             {
                 var questaoTopico = new QuestaoTopico
                 {
-                    QuestaoId = topicoDto.Questoes.First().QuestaoId,
-                    TopicoId = topicoDto.TopicoId,
+                    QuestaoId = (Guid)topicoDto.Questoes.First().QuestaoId,
+                    TopicoId = (Guid)topicoDto.TopicoId,
                     UserId = userId
                 };
 

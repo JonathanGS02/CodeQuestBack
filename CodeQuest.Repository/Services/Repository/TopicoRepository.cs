@@ -48,7 +48,7 @@ namespace CodeQuest.Repository.Services.Repository
                         var questaoTopico = new QuestaoTopico
                         {
                             TopicoId = topico.TopicoId,
-                            QuestaoId = item.QuestaoId,
+                            QuestaoId = (Guid)item.QuestaoId,
                             UserId = userId
                         };
                         _geralPersist.Add<QuestaoTopico>(questaoTopico);

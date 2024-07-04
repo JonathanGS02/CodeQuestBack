@@ -12,7 +12,7 @@ namespace CodeQuest.Repository.Dtos.Topico
 {
     public class TopicoDto
     {
-        public Guid TopicoId { get; set; }
+        public Guid? TopicoId { get; set; }
         public IEnumerable<QuestaoDto> Questoes { get; set; }
         public QuestaoDto? Questao { get; set; }
         [Required]

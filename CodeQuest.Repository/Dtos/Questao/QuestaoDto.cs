@@ -11,14 +11,14 @@ namespace CodeQuest.Repository.Dtos.Questao
 {
     public class QuestaoDto
     {
-        public Guid QuestaoId { get; set; }
+        public Guid? QuestaoId { get; set; }
         [Required(ErrorMessage = "O campo {0} e obrigatorio.")]
         [MinLength(4, ErrorMessage = "{0} deve ter no minimo 4 caracteres.")]
         [MaxLength(50, ErrorMessage = "{0} deve ter no minimo 50 caracteres.")]
         public string Titulo { get; set; }
         [Required(ErrorMessage = "O campo {0} e obrigatorio.")]
         [MinLength(4, ErrorMessage = "{0} deve ter no minimo 4 caracteres.")]
-        [MaxLength(50, ErrorMessage = "{0} deve ter no minimo 50 caracteres.")]
+        [MaxLength(50, ErrorMessage = "{0} deve ter no maximo 50 caracteres.")]
         public string Pergunta1 { get; set; }
         [Required(ErrorMessage = "O campo {0} e obrigatorio.")]
         [MinLength(4, ErrorMessage = "{0} deve ter no minimo 4 caracteres.")]
