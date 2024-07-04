@@ -33,8 +33,4 @@
 	  <ProjectReference Include="..\CodeQuest.Repository\CodeQuest.Repository.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Resources\Images\" />
-	</ItemGroup>
-
 </Project>

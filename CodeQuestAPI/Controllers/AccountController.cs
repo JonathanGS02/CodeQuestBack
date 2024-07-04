@@ -4,6 +4,7 @@ using CodeQuestAPI.Extensions;
 using CodeQuestAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using System.Security.Claims;
 
 namespace CodeQuestAPI.Controllers
@@ -16,12 +17,14 @@ namespace CodeQuestAPI.Controllers
         private readonly IAccount _accountService;
         private readonly ITokenService _tokenService;
         private readonly IUtil _util;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public AccountController(ITokenService tokenService, IAccount accountService, IUtil util)
+        public AccountController(ITokenService tokenService, IAccount accountService, IUtil util, IWebHostEnvironment hostEnvironment)
         {
             _accountService = accountService;
             _tokenService = tokenService;
             _util = util;
+            _hostEnvironment = hostEnvironment;
         }
 
         [HttpGet("GetUser")]
@@ -127,29 +130,57 @@ namespace CodeQuestAPI.Controllers
             }
         }
 
-        //[HttpPost("upload-image")]
-        //public async Task<IActionResult> UploadImage()
+        [HttpPost("upload-image")]
+        public async Task<IActionResult> UploadImage()
+        {
+            try
+            {
+                var user = await _accountService.GetUserByUserNameAsync(User.GetUserName());
+                if (user == null) return NoContent();
+
+                var file = Request.Form.Files[0];
+                if (file.Length > 0)
+                {
+                    _util.DeleteImage(user.ImagemURL, "images");
+                    user.ImagemURL = await _util.SaveImage(file, "images");
+                }
+                var userRetorno = await _accountService.UpdateAccount(user);
+
+                return Ok(userRetorno);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar realizar upload de Foto do Usuário. Erro: {ex.Message}");
+            }
+        }
+
+        //[NonAction]
+        //public async Task<string> SaveImage(IFormFile imageFile)
         //{
-        //    try
-        //    {
-        //        var user = await _accountService.GetUserByUserNameAsync(User.GetUserName());
-        //        if (user == null) return NoContent();
+        //    string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName)
+        //                                      .Take(10)
+        //                                      .ToArray()
+        //                                 ).Replace(' ', '-');
 
-        //        var file = Request.Form.Files[0];
-        //        if (file.Length > 0)
-        //        {
-        //            _util.DeleteImage(user.ImagemURL, _destino);
-        //            user.ImagemURL = await _util.SaveImage(file, _destino);
-        //        }
-        //        var userRetorno = await _accountService.UpdateAccount(user);
+        //    imageName = $"{imageName}{DateTime.UtcNow.ToString("yymmssfff")}{Path.GetExtension(imageFile.FileName)}";
 
-        //        return Ok(userRetorno);
-        //    }
-        //    catch (Exception ex)
+        //    var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, @"Resources/images", imageName);
+
+        //    using (var fileStream = new FileStream(imagePath, FileMode.Create))
         //    {
-        //        return this.StatusCode(StatusCodes.Status500InternalServerError,
-        //            $"Erro ao tentar realizar upload de Foto do Usuário. Erro: {ex.Message}");
+        //        await imageFile.CopyToAsync(fileStream);
         //    }
+
+        //    return imageName;
+        //}
+
+        //[NonAction]
+        //public void DeleteImage(string imageName)
+        //{
+        //    var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, @"Resources/images", imageName);
+        //    if (System.IO.File.Exists(imagePath))
+        //        System.IO.File.Delete(imagePath);
         //}
     }
 }
