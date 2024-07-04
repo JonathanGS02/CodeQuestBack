@@ -1,4 +1,5 @@
-﻿using CodeQuest.Domain.Identity;
+﻿using CodeQuest.Domain;
+using CodeQuest.Domain.Identity;
 using CodeQuest.Repository.Dtos.Questao;
 using CodeQuest.Repository.Dtos.User;
 using System;
@@ -14,6 +15,7 @@ namespace CodeQuest.Repository.Dtos.Topico
     {
         public Guid? TopicoId { get; set; }
         public IEnumerable<QuestaoDto> Questoes { get; set; }
+        public IEnumerable<QuestaoTopico>? QuestaoTopicos { get; set; }
         public QuestaoDto? Questao { get; set; }
         [Required]
         public int Nivel { get; set; }

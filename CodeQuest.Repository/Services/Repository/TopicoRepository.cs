@@ -92,6 +92,7 @@ namespace CodeQuest.Repository.Services.Repository
             {
                 var topicos = await _context.Topicos
                                             .Include(i => i.QuestaoTopicos)
+                                            .ThenInclude(i => i.Questao)
                                             .ToListAsync();
 
                 if (topicos == null)
@@ -132,6 +133,7 @@ namespace CodeQuest.Repository.Services.Repository
             {
                 var topico = await _context.Topicos
                                             .Where(x => x.Nivel == nivel)
+                                            .Include(i => i.QuestaoTopicos)
                                             .OrderBy(x => Guid.NewGuid())
                                             .FirstOrDefaultAsync();
 
