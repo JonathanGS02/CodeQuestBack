@@ -11,6 +11,7 @@ namespace CodeQuest.Domain.Identity
         public Funcao Funcao { get; set; }
         public string? Imagem { get; set; }
         public double Exp { get; set; }
+        public int Nivel { get; set; }
         public IEnumerable<UserRole> UserRoles { get; set; }
     }
 }
