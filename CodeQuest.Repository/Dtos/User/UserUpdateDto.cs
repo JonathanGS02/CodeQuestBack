@@ -20,7 +20,5 @@ namespace CodeQuest.Repository.Dtos.User
         public string Password { get; set; }
         public string Token { get; set; }
         public string Imagem { get; set; }
-        public double Exp { get; set; }
-        public int Nivel { get; set; }
     }
 }

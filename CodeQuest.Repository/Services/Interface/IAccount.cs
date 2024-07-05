@@ -15,7 +15,5 @@ namespace CodeQuest.Repository.Services.Interface
         Task<SignInResult> CheckUserPasswordAsync(UserUpdateDto userUpdateDto, string password);
         Task<UserUpdateDto> CreateAccountAsync(UserDto userDto);
         Task<UserUpdateDto> UpdateAccount(UserUpdateDto userUpdateDto);
-        Task<UserUpdateDto> SalvarProgresso(UserUpdateDto userUpdateDto);
-
     }
 }

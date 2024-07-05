@@ -45,9 +45,6 @@ namespace CodeQuest.Repository.Services.Repository
             try
             {
                 var user = _mapper.Map<User>(userDto);
-                user.Nivel = 0;
-                user.Exp = 0;
-
                 var result = await _userManager.CreateAsync(user, userDto.Password);
 
                 if (result.Succeeded)
@@ -77,29 +74,6 @@ namespace CodeQuest.Repository.Services.Repository
             catch (Exception ex)
             {
                 throw new Exception($"Erro ao tentar pegar Usuário por Username. Erro: {ex.Message}");
-            }
-        }
-
-        public async Task<UserUpdateDto> SalvarProgresso(UserUpdateDto userUpdateDto)
-        {
-            try
-            {
-                var usuario = await _user.GetUserByUsernameAsync(userUpdateDto.UserName);
-                usuario.Exp += userUpdateDto.Exp;
-
-                if (usuario.Exp == 0)
-                    usuario.Exp += 1;
-
-                usuario.Nivel += Convert.ToInt32(usuario.Exp / 100);
-
-                _user.Update<User>(usuario);
-                await _user.SaveChangesAsync();
-
-                return _mapper.Map<UserUpdateDto>(usuario);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Erro ao tentar salvar progresso. Erro: {ex.Message}");
             }
         }
 
